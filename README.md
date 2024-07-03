@@ -1,11 +1,20 @@
-Data and Applications
+## Data and Applications
+## Olympic Data Management CLI
 
-Olympic Data Management CLI
+## Project Phases
 
-phase1
+### Phase 1: Mini world
+- Determine data requirements for the database design.
+- Establish functional requirements for database operations.
 
-phase2
+### Phase 2: ER Diagram
+- Create an Entity-Relationship (ER) diagram to represent the data model.
 
-phase3
+### Phase 3: Normalization
+- Normalize the database to ensure data integrity and minimize redundancy.
 
-phase4
+### Phase 4: CLI Implementation
+- Implement the Command Line Interface (CLI) for interacting with the database.
+
+### [Demonstration](https://drive.google.com/file/d/11DkMf46wW2MJJmygVzD5LNzb0WTtAVHd/view?usp=sharing)
+
