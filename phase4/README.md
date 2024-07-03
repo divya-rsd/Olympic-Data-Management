@@ -1,6 +1,4 @@
-## Olympic Data Management CLI
-
-### [Demonstration]( https://drive.google.com/file/d/11DkMf46wW2MJJmygVzD5LNzb0WTtAVHd/view?usp=sharing)
+### Instructions
 
 - Use `source_code/31_database.sql` file to load initial data into your SQL database.
 
