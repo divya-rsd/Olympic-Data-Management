@@ -1,4 +1,5 @@
-## Data and Applications
+# Data and Applications
+
 ## Olympic Data Management CLI
 
 ## Project Phases
