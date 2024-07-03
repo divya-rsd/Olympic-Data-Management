@@ -1,1 +1,1 @@
-database
+# Olympic Data Management CLI
