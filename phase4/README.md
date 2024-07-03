@@ -2,8 +2,8 @@
 
 ### [Demonstration]( https://drive.google.com/file/d/11DkMf46wW2MJJmygVzD5LNzb0WTtAVHd/view?usp=sharing)
 
-- Use `31_database.sql` file to load initial data into your SQL database.
+- Use `source_code/31_database.sql` file to load initial data into your SQL database.
 
-- Modify `python.py` (lines) to update the username and password based on your system configuration.
+- Modify `sorce_code/python.py` (lines 1265 and 1266) to update the username and password based on your system configuration.
 
-- Refer to `Report.pdf` for detailed commands. Successful commands will display an insert message; errors will show an error message.
+- Refer to `report.pdf` for detailed commands. Successful commands will display an insert message; errors will show an error message.
