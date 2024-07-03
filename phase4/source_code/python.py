@@ -2,38 +2,6 @@ import subprocess as sp
 import pymysql
 import pymysql.cursors
 
-def hireAnAthlete():
-    """
-    Function to hire an athlete in the Olympics database.
-    """
-    try:
-        # Takes athlete details as input
-        row = {}
-        print("Enter new athlete's details: ")
-        row["name"] = input("Name: ")
-        row["gender"] = input("Gender (M/F): ")
-        row["dob"] = input("Date of Birth (YYYY-MM-DD): ")
-        row["country_id"] = input("Country ID: ")
-        row["height"] = int(input("Height: "))
-        row["weight"] = int(input("Weight: "))
-        row["cid"] = int(input("CID: "))
-        row["sid"] = int(input("SID: "))
-
-        query = "INSERT INTO athlete (name, gender, dob, country_id, height, weight, cid, sid) VALUES ('%s', '%s', '%s', %s, %s, %s, %s, %s)" % (
-            row["name"], row["gender"], row["dob"], row["country_id"], row["height"], row["weight"], row["cid"], row["sid"])
-
-        print(query)
-        cur.execute(query)
-        con.commit()
-
-        print("Inserted into Database")
-
-    except Exception as e:
-        con.rollback()
-        print("Failed to insert into database")
-        print("Error:", e)
-
-    return
 def selection_athlete_by_attribute(cur, attribute_choice):
     attribute_names = {
         1: "name",
@@ -194,8 +162,41 @@ def insertCountry():
         row["name"] = input("Country Name: ")
        
 
-        query = "INSERT INTO countries (country_code, name) VALUES ('%s', '%s')" % (
+        query = "INSERT INTO countries (country_code, name) VALUES (%s, '%s')" % (
             row["code"], row["name"])
+
+        print(query)
+        cur.execute(query)
+        con.commit()
+
+        print("Inserted into Database")
+
+    except Exception as e:
+        con.rollback()
+        print("Failed to insert into database")
+        print("Error:", e)
+
+    return
+
+def hireAnAthlete():
+    """
+    Function to hire an athlete in the Olympics database.
+    """
+    try:
+        # Takes athlete details as input
+        row = {}
+        print("Enter new athlete's details: ")
+        row["name"] = input("Name: ")
+        row["gender"] = input("Gender (Male/Female): ")
+        row["dob"] = input("Date of Birth (YYYY-MM-DD): ")
+        row["country_id"] = input("Country ID: ")
+        row["height"] = int(input("Height: "))
+        row["weight"] = int(input("Weight: "))
+        row["cid"] = int(input("CID: "))
+        row["sid"] = int(input("SID: "))
+
+        query = "INSERT INTO athlete (name, gender, dob, country_id, height, weight, cid, sid) VALUES ('%s', '%s', '%s', %s, %s, %s, %s, %s)" % (
+            row["name"], row["gender"], row["dob"], row["country_id"], row["height"], row["weight"], row["cid"], row["sid"])
 
         print(query)
         cur.execute(query)
@@ -223,7 +224,7 @@ def insertOlympicOccurrence():
         year = int(input("Year: "))
         season_participated = input("Season Participated: ")
 
-        query = "INSERT INTO OlympicOccurrence (id, winning_country, host_countries, year, season_participated) VALUES (%s, %s, %s, %s, '%s')"
+        query = "INSERT INTO OlympicOccurrence (id, winning_country, host_countries, year, season_participated) VALUES (%s, %s, %s, %s, %s)"
         values = (occurrence_id, winning_country, host_countries, year, season_participated)
 
         print(query % values)
@@ -305,10 +306,10 @@ def insertCoach():
         print("Enter new coach details: ")
         coach_id = int(input("Coach ID: "))
         name = input("Name: ")
-        gender = input("Gender (M/F): ")
+        gender = input("Gender (Male/Female): ")
         expertise_in = input("Expertise In: ")
 
-        query = "INSERT INTO coach (COACH_ID, NAME, GENDER, EXPERTISE_IN) VALUES (%s, '%s', '%s', '%s')"
+        query = "INSERT INTO coach (COACH_ID, NAME, GENDER, EXPERTISE_IN) VALUES (%s, %s, %s, %s)"
         values = (coach_id, name, gender, expertise_in)
 
         print(query % values)
@@ -335,7 +336,7 @@ def insertRanking():
         country_id = input("Country ID: ")
         rank = int(input("Rank: "))
 
-        query = "INSERT INTO ranking (o_id,country_id, rank) VALUES (%s, %s, %s)"
+        query = "INSERT INTO ranking (o_id, country_id, `rank`) VALUES (%s, %s, %s)"
         values = (occurrence_id, country_id, rank)
 
         print(query % values)
@@ -692,6 +693,8 @@ def updateTorch():
         con.rollback()
         print("Failed to update Torch in database")
         print("Error:", e)
+        
+        
 def DeleteTable():
     try:
         # Display the list of tables
@@ -700,7 +703,6 @@ def DeleteTable():
         print("2. athlete")
     
         
-
         # Get the table choice from the user
         table_choice = int(input("Enter the number of the table to delete: "))
         
@@ -715,6 +717,8 @@ def DeleteTable():
         print("Invalid input. Please enter a number.")
     except Exception as e:
         print("Error:", e)
+        
+        
 def updateTournament_winner():
     """
     Function to update details in the tournament_winner table.
@@ -1069,6 +1073,8 @@ def summedals():
         print("MySQL Error:", e)
 
     return
+
+
 def Minmedals():
     try:
         # Construct the SQL query
@@ -1223,6 +1229,7 @@ def getCountriesByRank():
         print("MySQL Error:", e)
 
     return
+
 def dispatch(ch):
     """
     Function that maps helper functions to the option entered
@@ -1256,7 +1263,7 @@ def dispatch(ch):
 while True:
     tmp = sp.call('clear', shell=True)
     username = "root"
-    password = "V@14"
+    password = "12345678"
 
     try:
         con = pymysql.connect(
@@ -1264,7 +1271,7 @@ while True:
             port=3306,
             user=username,
             password=password,
-            db='db',
+            db='dbname',
             cursorclass=pymysql.cursors.DictCursor
         )
         tmp = sp.call('clear', shell=True)
@@ -1289,7 +1296,7 @@ while True:
                 print("8. SUM of medals")
                 print("9. Minimum medals")
                 print("10. Maximum medals")
-                print("11.Get country ranking")
+                print("11. Get country ranking")
                 print("12. Logout")
                 ch = int(input("Enter choice> "))
                 tmp = sp.call('clear', shell=True)
